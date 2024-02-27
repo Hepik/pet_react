@@ -20,15 +20,16 @@ body {
 
 h1 {
   color: #fff;
-  margin-bottom: 0.5rem;
   font-size: 1.75rem;
 }
 
 .TodoWrapper {
+  width: 500px;
+  height: 600px;
   background: #1A1A40;
-  margin-top: 5rem;
+  margin-top: 3rem;
   padding: 2rem;
-  border-radius: 5px;
+  border-radius: 0px 10px 10px 10px;
 }
 
 .TodoForm {
@@ -36,27 +37,90 @@ h1 {
   margin-bottom: 1rem;
 }
 
+.TodoFormEdit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #8758ff;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  margin-right: 4px;
+}
+
 .todo-input {
   outline: none;
   background: none;
   border: 1px solid #8758ff;
-  padding: 0.5rem 1rem;
+  padding: 0.8rem 1rem;
   margin-top: 1rem;
-  margin-bottom: 2rem;
-  width: 300px;
+  width: 80%;
   color: #fff;
+  border-radius: 4px 0px 0px 4px;
+}
+
+.todo-input-edit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #7a55d7;
+  color: #ffffff;
+  width: 86%;
+  border-radius: 4px;
+  border-color: #54379f;
+  padding-top: 0.025rem;
+  padding-bottom: 0.025rem;
 }
 
 .todo-input::placeholder {
   color: #ffffff4d;
 }
 
+.todo-input-edit::placeholder {
+  color: #ffffff;
+}
+
 .todo-btn {
   background: #8758ff;
   color: #fff;
   border: none;
-  padding: 0.55rem;
+  padding: 0.83rem;
   cursor: pointer;
+  width: 20%;
+  height: 46.68px;
+  border-radius: 0px 4px 4px 0px;
+}
+
+.todo-btn-edit {
+  background: #8758ff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  width: 12%;
+}
+
+.ScrollList {
+  height: 400px;
+  overflow-y: auto;
+}
+
+.ScrollList::-webkit-scrollbar {
+  width: 10px;
+}
+
+.ScrollList::-webkit-scrollbar-track {
+  background: #141444;
+  border-radius: 4px;
+}
+
+.ScrollList::-webkit-scrollbar-thumb {
+  background: #8758ff;
+  border-radius: 4px;
+}
+
+.ScrollList::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
 }
 
 .Todo {
@@ -68,6 +132,7 @@ h1 {
   padding: 0.75rem 1rem;
   border-radius: 5px;
   margin-bottom: 1rem;
+  margin-right: 4px;
 }
 
 .fa-trash {
@@ -88,5 +153,9 @@ h1 {
 .edit-icon,
 .delete-icon {
   cursor: pointer;
+}
+
+.EditIcons {
+  display: flex;
 }
  
