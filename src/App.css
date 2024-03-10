@@ -16,6 +16,8 @@ body {
 
 .App {
   text-align: center;
+  width: 500px;
+  height: 600px;
 }
 
 h1 {
@@ -24,8 +26,6 @@ h1 {
 }
 
 .TodoWrapper {
-  width: 500px;
-  height: 600px;
   background: #1A1A40;
   margin-top: 3rem;
   padding: 2rem;
@@ -85,7 +85,6 @@ h1 {
   background: #8758ff;
   color: #fff;
   border: none;
-  padding: 0.83rem;
   cursor: pointer;
   width: 20%;
   height: 46.68px;
@@ -158,4 +157,73 @@ h1 {
 .EditIcons {
   display: flex;
 }
- 
+
+@media (width: 1180px) and  (height: 820px) {
+  .ScrollList {
+    height: 520px;
+  }
+
+  .App {
+    width: 900px;
+  }
+}
+
+@media (max-width: 992px) {
+  .App {
+    width: 620px;
+  }
+
+  .ScrollList {
+    height: 700px;
+  }
+}
+
+@media (min-width: 768px) {
+  
+}
+
+@media (min-width: 480px) {
+  
+}
+@media (max-width: 480px) {
+  body {
+    justify-content: initial;
+  }
+  .App {
+    display: flex;
+    height: 700px;
+    justify-content: center;
+    width: 410px;
+  }
+
+  .TodoWrapper {
+    width: 90%;
+  }
+
+  .ScrollList {
+    height: 455px;
+  }
+
+  .todo-btn {
+    font-size: small;
+  }
+}
+
+@media (max-height: 420px) {
+  .TodoWrapper {
+    margin-top: 1rem;
+  }
+
+  .ScrollList {
+    height: 200px;
+  }
+
+  .App {
+    height: 385px;
+  }
+}
+
+@media (min-width: 320px) {
+
+  
+}
