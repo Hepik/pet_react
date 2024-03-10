@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/pet_react/static/css/main.7afaf56f.css",
+    "main.js": "/pet_react/static/js/main.7d9185ba.js",
+    "static/js/453.3fe31aa4.chunk.js": "/pet_react/static/js/453.3fe31aa4.chunk.js",
+    "index.html": "/pet_react/index.html",
+    "main.7afaf56f.css.map": "/pet_react/static/css/main.7afaf56f.css.map",
+    "main.7d9185ba.js.map": "/pet_react/static/js/main.7d9185ba.js.map",
+    "453.3fe31aa4.chunk.js.map": "/pet_react/static/js/453.3fe31aa4.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7afaf56f.css",
+    "static/js/main.7d9185ba.js"
+  ]
+}
