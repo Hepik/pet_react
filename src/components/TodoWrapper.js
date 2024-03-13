@@ -6,11 +6,16 @@ import { EditTodoForm } from './EditTodoForm';
 uuidv4();
 
 export const TodoWrapper = () => {
-    const [todos, setTodos] = useState([])
+    const savedTodos = localStorage.getItem("todos") ?? "[]"
+
+    const [todos, setTodos] = useState(JSON.parse(savedTodos))
 
     const addTodo = todo => {
-      setTodos([...todos, {id: uuidv4(), task: todo, 
-      completed: false, isEditing: false}])
+      const newTodos = [...todos, {id: uuidv4(), task: todo, 
+        completed: false, isEditing: false}];
+      setTodos(newTodos)
+
+      localStorage.setItem("todos", JSON.stringify(newTodos))
     }
 
     const toggleComplete = id => {
@@ -18,7 +23,9 @@ export const TodoWrapper = () => {
     }
 
     const deleteTodo = id => {
-      setTodos(todos.filter(todo => todo.id !== id))
+      const updatedTodos = todos.filter(todo => todo.id !== id);
+      setTodos(updatedTodos);
+      localStorage.setItem("todos", JSON.stringify(updatedTodos));
     }
 
     const editTodo = id => {
@@ -26,7 +33,11 @@ export const TodoWrapper = () => {
     }
 
     const editTask = (task, id) => {
-      setTodos(todos.map(todo => todo.id === id ? {...todo, task, isEditing: !todo.isEditing} : todo))
+      const updatedTodos = todos.map(todo =>
+        todo.id === id ? { ...todo, task, isEditing: !todo.isEditing } : todo
+      );
+      setTodos(updatedTodos);
+      localStorage.setItem("todos", JSON.stringify(updatedTodos));
     }
     
   return (
@@ -34,7 +45,7 @@ export const TodoWrapper = () => {
       <h1>Make it</h1>
         <TodoForm addTodo={addTodo}/>
         <div className='ScrollList'>
-          {todos.map((todo, index) => (
+          {todos?.map((todo, index) => (
             todo.isEditing ? (
               <EditTodoForm editTodo={editTask} task={todo}/>
             ) : (
