@@ -8,6 +8,35 @@ import { toast } from "react-toastify";
 
 uuidv4();
 
+/*
+function a(param) {
+  return () => {
+    console.log(param.current);
+  }
+}
+
+let data = 1;
+const test = a(data);
+
+test() -> "1",
+
+data = 2;
+test() -> "1"
+
+=====
+
+let data = {
+  current: 1
+};
+const test = a(data);
+
+test() -> "1",
+
+data.current = 2;
+test() -> "2"
+
+*/
+
 export const TodoWrapper = () => {
   const savedTodos = localStorage.getItem("todos") || "[]";
 
