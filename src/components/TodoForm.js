@@ -9,7 +9,16 @@ export const TodoForm = ({ addTodo }) => {
     e.preventDefault();
 
     if (value.trim() === "") {
-      toast.error("Task can`t be empty!");
+      toast.error("Task can`t be empty!", {
+        position: "top-right",
+        autoClose: 10000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "dark",
+      });
       return;
     }
 

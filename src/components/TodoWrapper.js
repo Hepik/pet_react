@@ -20,14 +20,25 @@ export const TodoWrapper = () => {
     todosRef.current = todos;
   }, [todos]);
 
+  useEffect(() => {
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  })
+
+  const handleBeforeUnload = () => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  };
 
   const showDeleteToast = (todo) => {
-      toast.success('Undo', {
+      toast.success('◀️ Undo delete', {
         position: "top-right",
         autoClose: 10000,
         hideProgressBar: false,
         closeOnClick: true,
-        pauseOnHover: false,
+        pauseOnHover: true,
         draggable: false,
         progress: undefined,
         theme: "dark",
@@ -38,6 +49,8 @@ export const TodoWrapper = () => {
 
           const newTodos = [...todosRef.current, todo];
           setTodos(newTodos);
+
+          localStorage.setItem("todos", JSON.stringify(newTodos))
         },  // Виправлено тут
       });
   };;
@@ -69,14 +82,38 @@ export const TodoWrapper = () => {
   }
 
   const toggleComplete = (id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
+    const newToggle = todos.map((todo) =>
+    todo.id === id ? { ...todo, completed: !todo.completed } : todo
+  )
+    setTodos(newToggle);
+    localStorage.setItem("todos", JSON.stringify(newToggle));
   };
 
-  const editTodo = (id) => {
+  const showEditToast = (todo, id) => {
+    toast.success('◀️ Undo update', {
+      position: "top-right",
+      autoClose: 10000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+      theme: "dark",
+      onClick: () => {
+        // clearTimeout, return todo related to that timeout
+        const timerIdEdit = cachedTodos.current[id];
+        clearTimeout(timerIdEdit);
+
+        const previousTodos = JSON.parse(localStorage.getItem("todos")) || [];
+
+        setTodos(previousTodos);
+
+        localStorage.setItem("todos", JSON.stringify(previousTodos))
+      },  // Виправлено тут
+    });
+};;
+
+  const editTodoForm = (id) => {
     setTodos(
       todos.map((todo) =>
         todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
@@ -88,8 +125,16 @@ export const TodoWrapper = () => {
     const updatedTodos = todos.map((todo) =>
       todo.id === id ? { ...todo, task, isEditing: !todo.isEditing } : todo
     );
+
     setTodos(updatedTodos);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+
+    const timerIdEdit = setTimeout(() => {
+      localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    }, 10000);
+
+    cachedTodos.current[id] = timerIdEdit;
+    
+    showEditToast(task);
   };
 
   return (
@@ -99,13 +144,13 @@ export const TodoWrapper = () => {
       <div className="ScrollList">
         {todos?.map((todo, index) =>
           todo.isEditing ? (
-            <EditTodoForm editTodo={editTask} task={todo} key={index} />
+            <EditTodoForm editTodoForm={editTask} task={todo} key={index} />
           ) : (
             <Todo
               task={todo}
               key={index}
               toggleComplete={toggleComplete}
-              editTodo={editTodo}
+              editTodoForm={editTodoForm}
               handleDelete={() => handleDelete(todo)}
             />
           )
